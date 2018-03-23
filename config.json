@@ -1,0 +1,169 @@
+{
+    "proxy":"https://applications.bewapp.be/gettoken/proxy.ashx",
+    "themes":
+	[
+        {
+            "label":"Supported",
+            "panels":
+            [
+                {
+                    "label":"Services",
+                    "services":
+                    [
+                        {
+                            "label":"Dynamic MapService",
+                            "services":
+                            [
+                                {
+									"label":"No Visible Layers",
+									"type":"dynamic",
+									"visiblelayers":"",
+									"alpha":0.5, 
+									"visible":false,
+									"url":"https://applications.bewapp.be/ags/rest/services/bewapp/BEWAPP_Poubelle/MapServer"
+								},
+								{
+									"label":"Visible Layers",
+									"type":"dynamic",
+									"visiblelayers":"0,1",
+									"alpha":1, 
+									"visible":false,
+									"url":"https://applications.bewapp.be/ags/rest/services/FondDePlan_BeWaPP_mppo/MapServer"
+								}
+                            ]
+                        },
+                        {
+                            "label":"Tiled MapService",
+                            "services":
+                            [
+                                {
+                                    "label":"Tiled Links",
+                                    "type":"tiled",
+                                    "alpha":1, 
+                                    "url":"https://services.arcgisonline.nl/arcgis/rest/services/Luchtfoto/Luchtfoto/MapServer",
+                                    "links":
+                                    [
+                                        {"title":"News Intranet","url":"http://intranet.pch.etat.lu/gis/actualites-gis/1178-gisviewer-nouvelle-couche-cartes-topographiques-3d-dvldvd.html","icon":"EditPaste32.png"}
+                                    ]
+                                },
+                                {
+                                    "label":"Tiled MinScale 10000",
+                                    "type":"tiled",
+                                    "alpha":1,
+                                    "minScale":10000, 
+                                    "url":"http://gis.pch.etat.lu/arcgis/rest/services/sig/leves/MapServer"
+                                }
+                            ]
+                        },
+                        {
+                            "label":"Wms",
+                            "services":
+                            [
+                                {
+                                    "label":"Wms layers",
+                                    "type":"wms",
+                                    "layers":"0,1,2",
+                                    "alpha":1, 
+                                    "version":"1.3.0",
+                                    "url":"http://ws.geoportail.lu/natura2000?"
+                                },
+                                {
+                                    "label":"Wms one layer",
+                                    "type":"wms",
+                                    "layers":"0",
+                                    "alpha":1, 
+                                    "url":"http://ws.geoportail.lu/250k?"
+                                }
+                            ]
+                        },
+                        {
+                            "label":"FeatureLayer",
+                            "services":
+                            [
+                                {
+                                    "label":"FeatureLayer maxScale",
+                                    "type":"ArcGISFeatureLayer",
+                                    "maxScale":10000,
+                                    "alpha":1, 
+                                    "url":"http://ws.geoportail.lu/natura2000?"
+                                },
+                                {
+                                    "label":"FeatureLayer Url",
+                                    "type":"ArcGISFeatureLayer",
+                                    "alpha":1, 
+                                    "url":"http://wsetat.geoportal.lu/emwelt?"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label":"WebMap",
+                    "services":
+                    [
+						{
+                            "label":"Tiled",
+							"url":"https://www.arcgis.com/sharing/rest/content/items/8a567ebac15748d39a747649a2e86cf4",	
+							"type":"webMap",
+							"alpha":1, 
+							"visible":false
+                        },
+						{
+                            "label":"Wms",
+							"url":"https://www.arcgis.com/sharing/rest/content/items/a7dd2f045bf54d03a31cb8c32ecc9079",	
+							"type":"webMap",
+							"alpha":1, 
+							"visible":false
+						},
+						{
+                            "label":"Mixte",
+							"url":"https://www.arcgis.com/sharing/rest/content/items/80cf3cab370b4a5da22ed95609a28778",	
+							"type":"webMap",
+							"alpha":1, 
+							"visible":false
+						}
+                    ]
+                }
+            ]
+        },
+        {
+            "label":"Thème 2",
+            "panels":
+            [
+                {
+                    "label":"Panel1",
+                    "services":
+                    [
+                        
+                    ]
+                }
+            ]
+        },
+        {
+            "label":"Thème 3",
+            "panels":
+            [
+                {
+                    "label":"Panel1",
+                    "services":
+                    [
+                        
+                    ]
+                }
+            ]
+        },
+        {
+            "label":"Thème 4",
+            "panels":
+            [
+                {
+                    "label":"Panel1",
+                    "services":
+                    [
+                        
+                    ]
+                }
+            ]
+        }
+    ]
+}
