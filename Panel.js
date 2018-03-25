@@ -29,7 +29,7 @@ define([
 			var panel = document.createElement("div");
 			panel.className = "panel lighter darkest";
 			var header = document.createElement("div");
-			header.className = "header darker lightest";
+			header.className = "header darker lightest darkestBorderBottom";
 			panel.appendChild(header);
 			
 			var headerTitle = document.createElement("div");

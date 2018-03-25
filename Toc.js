@@ -87,6 +87,17 @@ define([
 						configItem.layer.setOpacity(configItem.alpha);
 				}));
 
+				on(item,'zoom',lang.hitch(this,function(result){
+					if(configItem.layer)
+					{
+						if(configItem.layer.initialExtent)
+							this.map.setExtent(configItem.layer.initialExtent);
+						else if(configItem.layer.fullExtent)
+							this.map.setExtent(configItem.layer.fullExtent);
+						
+					}
+				}));
+
 
 				return treeItem;
 				

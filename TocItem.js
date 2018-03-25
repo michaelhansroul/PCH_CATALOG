@@ -100,6 +100,19 @@ define([
             this.tools = tools;
             tools.className = 'tocTools';
 
+            var toolZoom = document.createElement('div');
+            toolZoom.className = 'tocTool';
+            toolZoom.title = 'Zoom';
+            var spanIconZoom = document.createElement('span');
+            spanIconZoom.className='icon zoom';
+            toolZoom.appendChild(spanIconZoom);
+
+            on(toolZoom,'click',lang.hitch(this,function(e){
+                this.emit('zoom',this.config);
+            }));
+
+            tools.appendChild(toolZoom);
+
             var toolOptions = document.createElement('div');
             this.toolOptions = toolOptions;
             toolOptions.className = 'tocTool';
@@ -118,12 +131,12 @@ define([
 
             //Menu
             this.menu = document.createElement('div');
-            this.menu.className = 'menu lighter darkest';
+            this.menu.className = 'menu lighter darkest darkestBorder';
             this.menu.style.display = 'none';
             
             //Transparency
             var alphaMenuItem = document.createElement('div');
-            alphaMenuItem.className = 'menuItem alpha';
+            alphaMenuItem.className = 'menuItem alpha darkestBorderBottom';
             
             var labelAlpha = document.createElement('div');
             labelAlpha.innerHTML = 'Transparence';

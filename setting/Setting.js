@@ -35,18 +35,23 @@ define([
   BaseWidgetSetting) {
     return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
       baseClass: 'jimu-widget-catalog-setting',
-      _disabledClass: "jimu-state-disabled",
-
-      postMixInProperties:function(){
-        this.inherited(arguments);
-      },
-
-      postCreate: function() {
-        this.inherited(arguments);
-      },
 
       startup: function() {
         this.inherited(arguments);
-      }
+        this.setConfig(this.config);
+      },
+
+      setConfig:function(config)
+      {
+        console.log("Set config3");
+        this.textArea.value = JSON.stringify(config,undefined, 4);
+      },
+
+      getConfig: function() {
+        console.log("Get config");
+        this.config = JSON.parse(this.textArea.value);
+        return this.config;
+      } 
+
     });
   });

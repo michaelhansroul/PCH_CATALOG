@@ -19,7 +19,8 @@ define([
     return declare([BaseWidget], {
       // Custom widget code goes here
 
-      baseClass: 'jimu-widget-catalogwidget',
+	  baseClass: 'jimu-widget-catalogwidget',
+	  colors:['default','red','blue','green','brown'],
 
       //this property is set by the framework when widget is loaded.
       //name: 'CustomWidget',
@@ -69,7 +70,7 @@ define([
 			
 			//ADD MENU ITEM
 			var div = document.createElement("div");
-			div.className = "theme";
+			div.className = "theme " +this.getColor(theme);
 			div.innerHTML = theme.label;
 			
 			on(div,"click",lang.hitch(this,function(){
@@ -87,6 +88,9 @@ define([
 				//REMOVE PANELS
 				this.current.removePanels();
 			}
+
+			this.catalogContainer.className = 'catalog '+this.getColor(theme);
+
 			this.current = theme;
 			this.themeLabel.innerHTML = theme.label;
 			
@@ -99,6 +103,14 @@ define([
 					}),
 					lang.hitch(this,function(error){this.error(error);})
 				);
+		},
+
+		getColor:function(theme)
+		{
+			if(this.colors.indexOf(theme.config.color)!=-1)
+				return theme.config.color;
+			else
+				return this.colors[0];
 		},
 		
 		error:function(error)

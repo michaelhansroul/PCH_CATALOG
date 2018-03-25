@@ -1,27 +1,198 @@
 @font-face{font-family:'fontawesome';src:url('../font/fontawesome-webfont.eot');src:url('../font/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),url('../font/fontawesome-webfont.woff') format('woff'),url('../font/fontawesome-webfont.ttf') format('truetype'),url('../font/fontawesome-webfont.svg') format('svg');font-weight:normal;font-style:normal}
 
 /**********************/
-/*       COLOR         */
+/*      DEFAULT COLOR */
 /**********************/
 
-.lightest
+.default .lightest
 {
 	color:#CBC9C6;
 }
 
-.lighter
+.default .lighter
 {
 	background-color:#CBC9C6;
 }
 
-.darker
+.default .darker
 {
 	background-color:#373635;
 }
 
-.darkest
+.default .darkest
 {
 	color:#11100E;
+}
+
+.default .darkestBorder
+{
+	border:solid 1px #11100E;
+}
+
+.default .darkestBorderBottom
+{
+	border-bottom:solid 1px #11100E;
+}
+
+.theme.default
+{
+	background-color: #CBC9C6 !important;
+}
+
+/**********************/
+/*      REd COLOR         */
+/**********************/
+
+.red .lightest
+{
+	color:#FFAAAA;
+}
+
+.red .lighter
+{
+	background-color:#FFAAAA;
+}
+
+.red .darker
+{
+	background-color:#801515;
+}
+
+.red .darkest
+{
+	color:#550000;
+}
+
+.red .darkestBorder
+{
+	border:solid 1px #550000;
+}
+
+.red .darkestBorderBottom
+{
+	border-bottom:solid 1px #550000;
+}
+
+.theme.red
+{
+	background-color: #FFAAAA !important;
+}
+
+/**********************/
+/*      Green COLOR         */
+/**********************/
+
+.green .lightest
+{
+	color:#75B095;
+}
+
+.green .lighter
+{
+	background-color:#75B095;
+}
+
+.green .darker
+{
+	background-color:#0F5837;
+}
+
+.green .darkest
+{
+	color:#003B20;
+}
+
+.green .darkestBorder
+{
+	border:solid 1px #003B20;
+}
+
+.green .darkestBorderBottom
+{
+	border-bottom:solid 1px #003B20;
+}
+
+.theme.green
+{
+	background-color: #75B095 !important;
+}
+
+/**********************/
+/*      Blue COLOR         */
+/**********************/
+
+.blue .lightest
+{
+	color:#7386A5;
+}
+
+.blue .lighter
+{
+	background-color:#7386A5;
+}
+
+.blue .darker
+{
+	background-color:#152D56;
+}
+
+.blue .darkest
+{
+	color:#061A3C
+}
+
+.blue .darkestBorder
+{
+	border:solid 1px #061A3C;
+}
+
+.blue .darkestBorderBottom
+{
+	border-bottom:solid 1px #061A3C;
+}
+
+.theme.blue
+{
+	background-color: #7386A5 !important;
+}
+
+/**********************/
+/*      Brown COLOR         */
+/**********************/
+
+.brown .lightest
+{
+	color:#E5BE9B;
+}
+
+.brown .lighter
+{
+	background-color:#E5BE9B;
+}
+
+.brown .darker
+{
+	background-color:#8C4C16;
+}
+
+.brown .darkest
+{
+	color:#6F3200
+}
+
+.brown .darkestBorder
+{
+	border:solid 1px #6F3200;
+}
+
+.brown .darkestBorderBottom
+{
+	border-bottom:solid 1px #6F3200;
+}
+
+.theme.brown
+{
+	background-color: #E5BE9B !important;
 }
 
 /**********************/
@@ -93,17 +264,14 @@
 	top:32px;
 	z-index:1;
 	font-size: 14px;
-	border:solid 1px #11100E;
 }
 
 .catalog .themes .themesMenu .theme
 {
 	width:100%;
-	display:inline-block;
-	line-height:24px;
-	height:24px;
-	padding:0px 5px 0px 5px;
+	padding:5px 5px 5px 5px;
 	cursor:pointer;
+	color:black !important;
 }
 
 /**********************/
@@ -124,7 +292,7 @@
 	height:30px;
 	/*display:inline-block;*/
 	text-transform: uppercase;
-	border-bottom: 1px solid #9A9997;
+	/*border-bottom: 1px solid #9A9997;*/
 	font-size: 15px;
 }
 
@@ -223,7 +391,6 @@
 	top: 32px;
 	z-index: 1;
 	width: 120px;
-	border:solid 1px #11100E;
 	font-size: 12px;
 }
 
@@ -232,12 +399,6 @@
 	width: 100%;
 	padding: 5px;
 	cursor: pointer;
-	border-bottom:solid 1px #11100E;
-}
-
-tocItem .menu .menuItem:last-child
-{
-	border-bottom:solid 0px #11100E;
 }
 
 .tocItem .menu .menuItem .alpha
@@ -396,6 +557,11 @@ tocItem .menu .menuItem:last-child
 .icon.up::before
 {
 	content: "\f0d8";
+}
+
+.icon.zoom::before
+{
+	content: "\f00e";
 }
 
 /************/
