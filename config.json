@@ -4,6 +4,7 @@
 	[
         {
             "label":"Supported",
+            "icon":"f018",
             "panels":
             [
                 {
@@ -96,7 +97,15 @@
                             ]
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "label":"Thème 2",
+            "icon":"f206",
+            "color":"brown",
+            "panels":
+            [
                 {
                     "label":"WebMap",
                     "services":
@@ -108,59 +117,20 @@
 							"alpha":1, 
 							"visible":false
                         },
-						{
-                            "label":"Wms",
-							"url":"https://www.arcgis.com/sharing/rest/content/items/a7dd2f045bf54d03a31cb8c32ecc9079",	
+                        {
+                            "label":"Tiled",
+							"url":"https://www.arcgis.com/sharing/rest/content/items/cb46d09b13f24a8da38ff96ace000cc7",	
 							"type":"webMap",
 							"alpha":1, 
 							"visible":false
-						},
-						{
-                            "label":"Mixte",
-							"url":"https://www.arcgis.com/sharing/rest/content/items/80cf3cab370b4a5da22ed95609a28778",	
+                        },
+                        {
+                            "label":"Tiled",
+							"url":"https://www.arcgis.com/sharing/rest/content/items/8d1414297d6b488f9fdc2258e235c1dd",	
 							"type":"webMap",
 							"alpha":1, 
 							"visible":false
-						}
-                    ]
-                }
-            ]
-        },
-        {
-            "label":"Thème 2",
-            "panels":
-            [
-                {
-                    "label":"Panel1",
-                    "services":
-                    [
-                        
-                    ]
-                }
-            ]
-        },
-        {
-            "label":"Thème 3",
-            "panels":
-            [
-                {
-                    "label":"Panel1",
-                    "services":
-                    [
-                        
-                    ]
-                }
-            ]
-        },
-        {
-            "label":"Thème 4",
-            "panels":
-            [
-                {
-                    "label":"Panel1",
-                    "services":
-                    [
-                        
+                        }
                     ]
                 }
             ]

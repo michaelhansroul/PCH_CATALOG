@@ -114,7 +114,7 @@ define([
 			{
 				configItem.visible = true;
 				if(configItem.type == "webMap")
-					configItem.visible = configItem.visible ? configItem.visible:false;
+					configItem.visible = false;//configItem.visible ? configItem.visible:false;
 
 			}
 			
