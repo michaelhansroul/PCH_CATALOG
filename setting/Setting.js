@@ -22,7 +22,8 @@ define([
     'dojo/_base/query',
     'dojo/on',
     'dijit/_WidgetsInTemplateMixin',
-    'jimu/BaseWidgetSetting'
+    'jimu/BaseWidgetSetting',
+    "dojo/dom-class"
   ],
   function(
   declare, 
@@ -32,13 +33,17 @@ define([
   query, 
   on, 
   _WidgetsInTemplateMixin, 
-  BaseWidgetSetting) {
+  BaseWidgetSetting,
+  domClass) {
     return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
       baseClass: 'jimu-widget-catalog-setting',
 
       startup: function() {
         this.inherited(arguments);
         this.setConfig(this.config);
+        this.selecTab(this.configContainer);
+        on(this.configTab,'click',lang.hitch(this,function(){this.selecTab(this.configContainer)}))
+        on(this.helpTab,'click',lang.hitch(this,function(){this.selecTab(this.helpContainer)}));
       },
 
       setConfig:function(config)
@@ -51,7 +56,18 @@ define([
         console.log("Get config");
         this.config = JSON.parse(this.textArea.value);
         return this.config;
-      } 
+      },
+      
+      selecTab:function(container)
+      {
+        if(this.currentTab)
+        {
+          this.currentTab.style.display='none';
+        }
+        this.currentTab = container;
+        this.currentTab.style.display='block';
+
+      }
 
     });
   });
