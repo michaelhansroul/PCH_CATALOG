@@ -81,6 +81,7 @@ define([
 
             var tdLabel = document.createElement("td");
             var spanLabel = document.createElement("span");
+            spanLabel.className = 'label';
             spanLabel.innerHTML = this.config.label;
             tdLabel.appendChild(spanLabel);
 

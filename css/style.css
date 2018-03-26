@@ -268,10 +268,19 @@
 
 .catalog .themes .themesMenu .theme
 {
+	position: relative;
 	width:100%;
-	padding:5px 5px 5px 5px;
+	padding:5px 5px 5px 25px;
 	cursor:pointer;
 	color:black !important;
+}
+
+.catalog .themes .themesMenu .theme .icon
+{
+	position: absolute;
+	top:5px;
+	left: 5px;
+	z-index: 1;
 }
 
 /**********************/
@@ -342,6 +351,11 @@
 
 .tocItem td.checkbox .checkbox{
 	display: inline;
+}
+
+.notVisibleScale .tocItem td .label
+{
+	opacity: 0.5;
 }
 
 .tocItem td .loader
@@ -417,6 +431,8 @@
 	min-height: 20px;
 	font-size: 14px;
 }
+
+
 
 .treeItem.openable {
 	background-repeat: no-repeat;

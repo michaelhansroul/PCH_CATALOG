@@ -126,7 +126,7 @@ define([
 			{
 				this.container.removeChild(this.panels[i].dom);
 			}
-			this.hideVisibleLayer();
+			//this.hideVisibleLayer();
 		}
     });
 });

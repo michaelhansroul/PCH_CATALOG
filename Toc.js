@@ -42,6 +42,10 @@ define([
 			this.container = container;
 			this.layers = [];
 			this.create();
+
+			on(this.map,'extent-change',lang.hitch(this,function(extent){
+				this.refreshMinMaxScale();
+			}));
 		},
 		
 		create:function()
@@ -110,7 +114,7 @@ define([
 			{
 				configItem.visible = true;
 				if(configItem.type == "webMap")
-					configItem.visible = false;
+					configItem.visible = configItem.visible ? configItem.visible:false;
 
 			}
 			
@@ -351,6 +355,7 @@ define([
 			if(item.data.error) return;
 
 			//item.data.visible = true;
+			//Ajoute le dernier layer au dessus
 			var lastIndex = this.map.layerIds.length/*+this.map.graphicsLayerIds.length*/;
 			if(Array.isArray(item.data.layer))
 			{
@@ -364,6 +369,8 @@ define([
 				item.data.layer.setVisibility(true);
 				this.map.reorderLayer(item.data.layer,lastIndex);
 			}
+
+			this.refreshMinMaxScale();
 				
 		},
 
@@ -603,6 +610,50 @@ define([
 			return esriRequest({
 				url: layer.url+"?f=json",
 				},{usePost:false});
+		},
+
+		refreshMinMaxScale:function()
+		{
+			
+			for(var t=0;t<this.tree.items().length;t++)
+			{
+				this.refreshItem(this.tree.items()[t],false);
+			}
+		},
+		
+		refreshItem:function(treeItem)
+		{
+			var isGroupLayer = (treeItem.children && treeItem.children.length>0);
+			if(isGroupLayer)
+			{
+				for(var i=0;i<treeItem.children.length;i++)
+				{
+					this.refreshItem(treeItem.children[i]);
+				}
+			}
+			else if(treeItem.data.layer)
+			{
+				if(this.isVisibleAtScale(treeItem.data.layer))
+				{
+					domClass.remove(treeItem.dom,'notVisibleScale');
+				}
+				else
+				{
+					domClass.add(treeItem.dom,'notVisibleScale');
+				}
+			}
+		},
+
+		isVisibleAtScale(layer)
+		{
+			var layers = this.map.getLayersVisibleAtScale();
+			for(var i=0;i<layers.length;i++)
+			{
+				if(layers[i]===layer)
+					return true;
+			}
+			return false;
 		}
+		
     });
 });

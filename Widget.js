@@ -71,7 +71,9 @@ define([
 			//ADD MENU ITEM
 			var div = document.createElement("div");
 			div.className = "theme " +this.getColor(theme);
-			div.innerHTML = theme.label;
+			if(!theme.config.icon)
+				theme.config.icon = 'f105';
+			div.innerHTML = "<div class='icon'>&#x"+theme.config.icon+";</div><span>"+theme.label+'</span>';
 			
 			on(div,"click",lang.hitch(this,function(){
 				this.selectTheme(theme);
