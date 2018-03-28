@@ -296,40 +296,16 @@ define([
 						item.data.layer = layer;
 						//item.data.mapService.catalogItem = item.data;
 						self.showStateItem(item,'checkbox');
-						if(Array.isArray(layer))
+						
+						/*if(Array.isArray(layer))
 						{
 							for(var l=0;l<layer.length;l++)
 								self.map.addLayer(item.data.layer[l]);
 						}
 						else
 						{
-							self.map.addLayer(item.data.layer);
-							/*var newConfigPosition = item.data.position;
-
-							//Reorder
-							var add = false;
-							console.log(self.layers);
-							for(var l=0;self.layers.length;l++)
-							{
-								var configPosition = self.layers[l].data.position;
-								if(configPosition>newConfigPosition)
-								{
-									var mapIndex = self.getLayerIndex(self.layers[l].data.layer);
-									console.log("map:"+mapIndex +" current:"+ configPosition +" new:"+ newConfigPosition);
-									self.map.addLayer(item.data.layer,mapIndex);
-									self.layers.splice(l, 0,item);
-									add = true;
-									break;
-								}
-							}
-
-							if(!add)
-							{
-								self.map.addLayer(item.data.layer);
-								self.layers.push(item);
-							}*/
-							
-						}
+							self.map.addLayer(item.data.layer);							
+						}*/
 							
 						self.showLayer(item);
 					},
@@ -354,9 +330,8 @@ define([
 			
 			if(item.data.error) return;
 
-			//item.data.visible = true;
 			//Ajoute le dernier layer au dessus
-			var lastIndex = this.map.layerIds.length/*+this.map.graphicsLayerIds.length*/;
+			/*var lastIndex = this.map.layerIds.length;//this.map.graphicsLayerIds.length
 			if(Array.isArray(item.data.layer))
 			{
 				for(var l=0;l<item.data.layer.length;l++)
@@ -368,6 +343,16 @@ define([
 			else{
 				item.data.layer.setVisibility(true);
 				this.map.reorderLayer(item.data.layer,lastIndex);
+			}*/
+
+			if(Array.isArray(item.data.layer))
+			{
+				for(var l=0;l<item.data.layer.length;l++)
+					this.map.addLayer(item.data.layer[l]);
+			}
+			else
+			{
+				this.map.addLayer(item.data.layer);							
 			}
 
 			this.refreshMinMaxScale();
@@ -378,8 +363,7 @@ define([
 		
 		hideLayer:function(item)
 		{
-			//item.data.visible = false;
-			if(item.data.layer)
+			/*if(item.data.layer)
 			{
 				if(Array.isArray(item.data.layer))
 				{
@@ -388,6 +372,17 @@ define([
 				}
 				else
 					item.data.layer.setVisibility(false);
+			}*/
+
+			if(item.data.layer)
+			{
+				if(Array.isArray(item.data.layer))
+				{
+					for(var l=0;l<item.data.layer.length;l++)
+						this.map.removeLayer(item.data.layer[l]);
+				}
+				else
+					this.map.removeLayer(item.data.layer);
 			}
 		},
 
@@ -410,6 +405,7 @@ define([
 					if(serviceInfo.version)
 						options['version'] = serviceInfo.version;
 
+					window.catalogProxy.add(serviceInfo.url);
 					layer = new WMSLayer(this.proxy+serviceInfo.url,options);
 					
 					if(serviceInfo.minScale)
@@ -419,6 +415,7 @@ define([
 
 					break;
 				case "tiled":
+					window.catalogProxy.add(serviceInfo.url);
 					layer = new ArcGISTiledMapServiceLayer(this.proxy+serviceInfo.url,
 					{
 						"opacity": serviceInfo.alpha ? serviceInfo.alpha : 1							
@@ -431,6 +428,7 @@ define([
 						layer.setMaxScale(serviceInfo.maxScale);
 					break;
 				case "dynamic":
+					window.catalogProxy.add(serviceInfo.url);
 					var dynamicMapService = new ArcGISDynamicMapServiceLayer(this.proxy+serviceInfo.url,
 					{
 						"opacity": serviceInfo.alpha ? serviceInfo.alpha : 1
@@ -475,6 +473,7 @@ define([
 				case 'ArcGISFeatureLayer':
 					if(serviceInfo.url)
 					{
+						window.catalogProxy.add(serviceInfo.url);
 						layer = new FeatureLayer(this.proxy+serviceInfo.url,{
 							"opacity": serviceInfo.alpha ? serviceInfo.alpha : 1							
 						});

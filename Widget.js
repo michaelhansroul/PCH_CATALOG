@@ -4,7 +4,8 @@ define([
 	'dojo/on',
 	'jimu/BaseWidget',
 	'./Theme',
-	'./Splash'
+	'./Splash',
+	'./ProxyManager'
 	],
   function(
 	declare,
@@ -12,7 +13,8 @@ define([
 	on,
 	BaseWidget,
 	Theme,
-	Splash
+	Splash,
+	Proxy
 	) 
 	{
     //To create a widget, you need to derive from BaseWidget.
@@ -35,7 +37,9 @@ define([
 	  
 		startup: function() {
 			this.inherited(arguments);
-			
+			//PROXY
+			window.catalogProxy = new Proxy(this.config.proxy);
+
 			//SPLASH
 			this.splash = new Splash(this.splashContainer,this.overlay);
 			
@@ -49,8 +53,8 @@ define([
 			
 			if(this.config.proxy)
 			{
-				esriConfig.defaults.io.alwaysUseProxy = true;
-				esriConfig.defaults.io.proxyUrl = this.config.proxy;
+				//esriConfig.defaults.io.alwaysUseProxy = true;
+				//esriConfig.defaults.io.proxyUrl = this.config.proxy;
 			}
 
 			var configThemes = this.config.themes;

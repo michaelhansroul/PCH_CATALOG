@@ -12,7 +12,9 @@ define([
 		constructor: function(service,proxy){
 			this.proxy = proxy;
 			this.service = service;
-			esriConfig.defaults.io.corsEnabledServers.push(this.getDomain(service.url));
+			this.domain = this.getDomain(service.url);
+			this.portalUrl = service.url.split('/sharing')[0];
+			window.catalogProxy.add(this.service.url);
 		},
 		
 		getDomain:function(data) {
@@ -74,6 +76,15 @@ define([
 						for(var i=info.operationalLayers.length-1;i>=0;i--)
 						{
 							var layer = info.operationalLayers[i];
+							var links = [];
+							if(layer.itemId)
+							{
+								links.push({
+									'title':'Description',
+									'url':this.portalUrl+'/home/item.html?id='+layer.itemId
+								});
+							}
+
 							if(layer.layerType=="ArcGISFeatureLayer")
 							{
 								if(layer.url)
@@ -83,7 +94,8 @@ define([
 										type:"ArcGISFeatureLayer", 
 										url:layer.url,
 										alpha:layer.opacity,
-										visible:layer.visibility
+										visible:layer.visibility,
+										links:links
 									});
 								}
 								else if(layer.featureCollection)
@@ -104,7 +116,8 @@ define([
 										type:"ArcGISFeatureLayer", 
 										featureCollection:layer.featureCollection,
 										alpha:layer.opacity,
-										visible:layer.visibility
+										visible:layer.visibility,
+										links:links
 									});
 								
 								}
@@ -122,7 +135,8 @@ define([
 									layers:layer.visibleLayers ? layer.visibleLayers.join(","):"",
 									alpha:layer.opacity,
 									version:layer.version,
-									visible:layer.visibility
+									visible:layer.visibility,
+									links:links
 								});
 							}
 							else if(layer.layerType=="ArcGISMapServiceLayer")
@@ -168,7 +182,8 @@ define([
 									alpha:layer.opacity,
 									visible:layer.visibility,
 									visiblelayers:layer.visibleLayers ? layer.visibleLayers.join(","):"",
-									url:layer.url
+									url:layer.url,
+									links:links
 								});
 							}
 							else if(layer.layerType=="ArcGISDynamicMapServiceLayer")
@@ -179,7 +194,8 @@ define([
 									visiblelayers:layer.visibleLayers ? layer.visibleLayers.join(","):"",
 									alpha:layer.opacity,
 									visible:layer.visibility,
-									url:layer.url
+									url:layer.url,
+									links:links
 								});
 							}
 							else if(layer.layerType=="ArcGISTiledMapServiceLayer")
@@ -189,7 +205,8 @@ define([
 									type:"tiled",
 									alpha:layer.opacity,
 									visible:layer.visibility,
-									url:layer.url
+									url:layer.url,
+									links:links
 								});
 							}
 							else if(layer.url && !layer.type && !layer.layerType)
@@ -199,7 +216,8 @@ define([
 									type:"dynamic",
 									alpha:layer.opacity,
 									visible:layer.visibility,
-									url:layer.url
+									url:layer.url,
+									links:links
 								});
 							}
 							else

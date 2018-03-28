@@ -130,6 +130,13 @@
 							"type":"webMap",
 							"alpha":1, 
 							"visible":false
+                        },
+                        {
+                            "label":"Portal",
+							"url":"https://applications.bewapp.be/waportal/sharing/rest/content/items/a2f79bd3140c4aa6a3dd1ed93e89e4a5",	
+							"type":"webMap",
+							"alpha":1, 
+							"visible":false
                         }
                     ]
                 }
