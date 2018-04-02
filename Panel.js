@@ -15,14 +15,13 @@ define([
 	)
 {
     return declare([Evented], {
-		constructor: function(map,config,proxy){
-			this.proxy=proxy;
+		constructor: function(map,config){
 			this.map = map;
 			this.config = config;
 			this.label = config.label;
 			this.dom = this.create();
 			if(config.services)
-				this.toc = new Toc(this.map,config.services,this.content,this.proxy);
+				this.toc = new Toc(this.map,config.services,this.content);
 		},
 		
 		create:function(){

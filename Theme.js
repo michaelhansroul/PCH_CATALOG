@@ -17,8 +17,7 @@ define([
 	)
 {
     return declare([Evented], {
-		constructor: function(map,config,container,proxy){
-			this.proxy = proxy;
+		constructor: function(map,config,container){
 			this.map = map;
 			this.panels = [];
 			this.container = container;
@@ -63,7 +62,7 @@ define([
 				var promises = [];
 				for(var i=0;i<mapItems.length;i++)
 				{
-					var mapItem = new MapItemService(mapItems[i],this.proxy);
+					var mapItem = new MapItemService(mapItems[i]);
 					promises.push(mapItem.load());
 				}
 				
@@ -90,7 +89,7 @@ define([
 				{
 					mapItems = mapItems.concat(this.getMapItems(service.services));
 				}
-				else if(service.type=="webMap")
+				else if(service.type=="webMap" || service.type=="webLayer") 
 				{
 					mapItems.push(service);
 				}
@@ -106,7 +105,7 @@ define([
 			{
 				for(var i=0;i<this.config.panels.length;i++)
 				{
-					var panel = new Panel(this.map,this.config.panels[i],this.proxy);
+					var panel = new Panel(this.map,this.config.panels[i]);
 					if(i>0)
 						panel.hide();
 					this.panels.push(panel);

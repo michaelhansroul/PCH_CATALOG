@@ -18,13 +18,25 @@ define([
 {
     return declare([Evented], {
 
-		constructor: function(proxy){
+		constructor: function(proxy,prefixes){
+            console.log(prefixes);
             this.proxy = proxy;
             this.domains = [];
             if(this.proxy)
             {
                 this.uri = this.getUri(window.location.href);
                 this.domain = this.getDomain(this.uri);
+                if(prefixes)
+                {
+                    for(var i=0;i<prefixes.length;i++)
+                    {
+                        console.log(prefixes[i]);
+                        urlUtils.addProxyRule({
+                            urlPrefix: prefixes[i],
+                            proxyUrl: this.proxy
+                        });
+                    }
+                }
             }
         },
 
@@ -39,7 +51,8 @@ define([
         
         add:function(url)
         {
-            var uri = this.getUri(url);
+            ///AUTOMATIQUE PROXY
+            /*var uri = this.getUri(url);
             var domain = this.getDomain(uri);
 
             if(this.domains.indexOf(domain)!=-1) return;
@@ -56,7 +69,7 @@ define([
             urlUtils.addProxyRule({
                 urlPrefix: domain,
                 proxyUrl: this.proxy
-            });
+            });*/
         },
 
         getUri:function(data) {

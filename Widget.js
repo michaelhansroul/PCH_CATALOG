@@ -38,7 +38,7 @@ define([
 		startup: function() {
 			this.inherited(arguments);
 			//PROXY
-			window.catalogProxy = new Proxy(this.config.proxy);
+			window.catalogProxy = new Proxy(this.config.proxy,this.config.prefixes);
 
 			//SPLASH
 			this.splash = new Splash(this.splashContainer,this.overlay);
@@ -50,17 +50,11 @@ define([
 			on(this.themesButton,"click",lang.hitch(this,function(){
 				this.toggle(this.themesMenu);
 			}));
-			
-			if(this.config.proxy)
-			{
-				//esriConfig.defaults.io.alwaysUseProxy = true;
-				//esriConfig.defaults.io.proxyUrl = this.config.proxy;
-			}
 
 			var configThemes = this.config.themes;
 			for(var i=0;i<configThemes.length;i++)
 			{
-				var theme = new Theme(this.map,configThemes[i],this.catalogContainer,"");
+				var theme = new Theme(this.map,configThemes[i],this.catalogContainer);
 				this.addTheme(theme);
 			}
 			

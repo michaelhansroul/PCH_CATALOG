@@ -9,12 +9,10 @@ define([
 ], function(Evented,declare,on,lang,esriRequest,urlUtils,esriConfig){
     return declare([Evented], {
 		
-		constructor: function(service,proxy){
-			this.proxy = proxy;
+		constructor: function(service){
 			this.service = service;
 			this.domain = this.getDomain(service.url);
 			this.portalUrl = service.url.split('/sharing')[0];
-			window.catalogProxy.add(this.service.url);
 		},
 		
 		getDomain:function(data) {
@@ -45,7 +43,12 @@ define([
 						self.service.label = info.title;
 						if(info.type=="Map Service")
 						{
-							self.service.type = "dynamic";
+							self.service.type = "ArcGISMapServiceLayer";
+							self.service.url = info.url;
+						}
+						else if(info.type=="Feature Service")
+						{
+							self.service.type = "ArcGISFeatureLayer";
 							self.service.url = info.url;
 						}
 						resolve();

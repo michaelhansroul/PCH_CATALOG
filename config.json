@@ -1,5 +1,11 @@
 {
     "proxy":"https://applications.bewapp.be/gettoken/proxy.ashx",
+    "prefixes":[
+        "intranet.pch.etat.lu",
+        "ws.geoportail.lu",
+        "applications.bewapp.be",
+        "ns333877.esribelux.eu"
+    ],
     "themes":
 	[
         {
@@ -139,6 +145,21 @@
 							"visible":false
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "label":"Thème 3",
+            "icon":"f206",
+            "color":"green",
+            "panels":
+            [
+                {
+                    "label":"DynamicMapService",
+                    "url":"https://applications.bewapp.be/waportal/sharing/rest/content/items/14228ba1269a4ecab5015671d8f19912",	
+                    "type":"webMap",
+                    "alpha":1, 
+                    "visible":false
                 }
             ]
         }

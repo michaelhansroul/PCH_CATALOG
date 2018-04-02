@@ -35,8 +35,7 @@ define([
 	)
 {
     return declare([Evented], {
-		constructor: function(map,config,container,proxy){
-			this.proxy = proxy;
+		constructor: function(map,config,container){
 			this.map = map;
 			this.config = config;
 			this.container = container;
@@ -405,8 +404,7 @@ define([
 					if(serviceInfo.version)
 						options['version'] = serviceInfo.version;
 
-					window.catalogProxy.add(serviceInfo.url);
-					layer = new WMSLayer(this.proxy+serviceInfo.url,options);
+					layer = new WMSLayer(serviceInfo.url,options);
 					
 					if(serviceInfo.minScale)
 						layer.setMinScale(serviceInfo.minScale);
@@ -415,8 +413,7 @@ define([
 
 					break;
 				case "tiled":
-					window.catalogProxy.add(serviceInfo.url);
-					layer = new ArcGISTiledMapServiceLayer(this.proxy+serviceInfo.url,
+					layer = new ArcGISTiledMapServiceLayer(serviceInfo.url,
 					{
 						"opacity": serviceInfo.alpha ? serviceInfo.alpha : 1							
 						/*"infoTemplates":infoTemplates*/
@@ -428,8 +425,7 @@ define([
 						layer.setMaxScale(serviceInfo.maxScale);
 					break;
 				case "dynamic":
-					window.catalogProxy.add(serviceInfo.url);
-					var dynamicMapService = new ArcGISDynamicMapServiceLayer(this.proxy+serviceInfo.url,
+					var dynamicMapService = new ArcGISDynamicMapServiceLayer(serviceInfo.url,
 					{
 						"opacity": serviceInfo.alpha ? serviceInfo.alpha : 1
 						/*"infoTemplates":infoTemplates*/
@@ -473,8 +469,7 @@ define([
 				case 'ArcGISFeatureLayer':
 					if(serviceInfo.url)
 					{
-						window.catalogProxy.add(serviceInfo.url);
-						layer = new FeatureLayer(this.proxy+serviceInfo.url,{
+						layer = new FeatureLayer(serviceInfo.url,{
 							"opacity": serviceInfo.alpha ? serviceInfo.alpha : 1							
 						});
 
