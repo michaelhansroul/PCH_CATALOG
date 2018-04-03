@@ -469,14 +469,55 @@ define([
 				case 'ArcGISFeatureLayer':
 					if(serviceInfo.url)
 					{
-						layer = new FeatureLayer(serviceInfo.url,{
-							"opacity": serviceInfo.alpha ? serviceInfo.alpha : 1							
-						});
+						if(!serviceInfo.initialize)
+						{
+							this.getMapServiceInfo(serviceInfo).then(
+								lang.hitch(this,function(result){
+									serviceInfo.initialize = true;
+									if(result.type && result.type=="Feature Layer")
+									{
+										layer = new FeatureLayer(serviceInfo.url,{
+											"opacity": serviceInfo.alpha ? serviceInfo.alpha : 1							
+										});
+				
+										if(serviceInfo.minScale)
+											layer.setMinScale(serviceInfo.minScale);
+										if(serviceInfo.maxScale)
+											layer.setMaxScale(serviceInfo.maxScale);
+										successCallback(layer);
+									}
+									else if(result.layers)
+									{
+										layer = [];
+										var layerIndex = 0;
+										for(var i=0;i<result.layers.length;i++)
+										{
+											if(!result.layers[i].defaultVisibility)continue;
+											layer.push(new FeatureLayer(serviceInfo.url+"/"+result.layers[i].id,{
+												"opacity": serviceInfo.alpha ? serviceInfo.alpha : 1							
+											}));
+				
+											if(result.layers[i].minScale)
+												layer[layerIndex].setMinScale(result.layers[i].minScale);
+											if(result.layers[i].maxScale)
+												layer[layerIndex].setMaxScale(result.layers[i].maxScale);
 
-						if(serviceInfo.minScale)
-							layer.setMinScale(serviceInfo.minScale);
-						if(serviceInfo.maxScale)
-							layer.setMaxScale(serviceInfo.maxScale);
+											layerIndex++;
+										}
+
+										successCallback(layer);
+									}
+									else
+									{
+										errorCallback('A type of ArcGISFeatureLayer not implemented');
+									}
+		
+								}),
+								lang.hitch(this,function(error){
+									errorCallback(error);
+								})
+							);
+						}
 					}
 					else if(serviceInfo.featureCollection)
 					{
@@ -640,9 +681,13 @@ define([
 
 		isVisibleAtScale(layer)
 		{
+			if(Array.isArray(layer))
+				return true;
 			var layers = this.map.getLayersVisibleAtScale();
 			for(var i=0;i<layers.length;i++)
 			{
+				
+
 				if(layers[i]===layer)
 					return true;
 			}

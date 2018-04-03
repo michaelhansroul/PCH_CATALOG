@@ -41,6 +41,15 @@ define([
 				},{usePost:true}).then(
 					lang.hitch(self,function(info){
 						self.service.label = info.title;
+
+						var links = [];
+						links.push({
+							'title':'Description',
+							'url':this.portalUrl+'/home/item.html?id='+info.id
+						});
+							
+						self.service.links=links;
+
 						if(info.type=="Map Service")
 						{
 							self.service.type = "ArcGISMapServiceLayer";
