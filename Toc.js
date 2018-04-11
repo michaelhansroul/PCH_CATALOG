@@ -15,6 +15,7 @@ define([
 	'esri/layers/ArcGISTiledMapServiceLayer',
 	"esri/layers/FeatureLayer",
 	'./TocItem',
+	"jimu/LayerStructure"
 ], function(
 	Evented,
 	declare,
@@ -31,7 +32,8 @@ define([
 	WMSLayer, 
 	ArcGISTiledMapServiceLayer,
 	FeatureLayer,
-	TocItem
+	TocItem,
+	LayerStructure
 	)
 {
     return declare([Evented], {
@@ -40,6 +42,19 @@ define([
 			this.config = config;
 			this.container = container;
 			this.layers = [];
+			this.layerStructureAction = [];
+			this.layerStructureInstance = LayerStructure.getInstance();
+
+			this.layerStructureInstance.on(LayerStructure.EVENT_STRUCTURE_CHANGE, lang.hitch(this,function(eventObject) {
+				for(var i=0;i<this.layerStructureAction.length;i++)
+				{
+					var node = this.layerStructureInstance.getNodeById(this.layerStructureAction[i].data.layer.id);
+					if(this.layerStructureAction[i].enablePopup)
+						node.enablePopup();
+				}
+				this.layerStructureAction = [];
+			}));
+
 			this.create();
 
 			on(this.map,'extent-change',lang.hitch(this,function(extent){
@@ -105,9 +120,6 @@ define([
 				return treeItem;
 				
 			}
-			
-
-			
 
 			if(isGroupLayer)
 			{
@@ -351,14 +363,41 @@ define([
 			}
 			else
 			{
-				this.map.addLayer(item.data.layer);							
+				this.map.addLayer(item.data.layer);	
+				if(item.data.enablePopup)
+				{
+					var node = this.layerStructureInstance.getNodeById(item.data.layer.id);
+					if(node)
+						node.enablePopup();
+					else
+						this.layerStructureAction.push({
+							enablePopup:true,
+							data:item.data
+						});
+				}						
 			}
 
 			this.refreshMinMaxScale();
 				
 		},
 
-		
+		enablePopup:function(data)
+		{
+			var node = this.layerStructureInstance.getNodeById(data.layer.id);
+			if(!node)
+			{
+				this.layerStructureAction.push({
+					enablePopup:true,
+					data:data
+				});
+				return;
+			}
+
+			if(data.type=="dynamic")
+			{
+
+			}
+		},
 		
 		hideLayer:function(item)
 		{

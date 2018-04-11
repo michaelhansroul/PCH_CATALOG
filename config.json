@@ -1,104 +1,103 @@
 {
-    "proxy":"https://applications.bewapp.be/gettoken/proxy.ashx",
-    "prefixes":[
+    "proxy": "https://applications.bewapp.be/gettoken/proxy.ashx",
+    "prefixes": [
         "intranet.pch.etat.lu",
         "ws.geoportail.lu",
         "applications.bewapp.be",
-        "ns333877.esribelux.eu"
+        "ns333877.esribelux.eu:6080",
+        "services3.arcgis.com"
     ],
-    "themes":
-	[
+    "themes": [
         {
-            "label":"Supported",
-            "icon":"f018",
-            "panels":
-            [
+            "label": "Supported",
+            "icon": "f018",
+            "panels": [
                 {
-                    "label":"Services",
-                    "services":
-                    [
+                    "label": "Services",
+                    "services": [
                         {
-                            "label":"Dynamic MapService",
-                            "services":
-                            [
+                            "label": "Dynamic MapService",
+                            "services": [
                                 {
-									"label":"No Visible Layers",
-									"type":"dynamic",
-									"visiblelayers":"",
-									"alpha":0.5, 
-									"visible":false,
-									"url":"https://applications.bewapp.be/ags/rest/services/bewapp/BEWAPP_Poubelle/MapServer"
-								},
-								{
-									"label":"Visible Layers",
-									"type":"dynamic",
-									"visiblelayers":"0,1",
-									"alpha":1, 
-									"visible":false,
-									"url":"https://applications.bewapp.be/ags/rest/services/FondDePlan_BeWaPP_mppo/MapServer"
-								}
+                                    "label": "No Visible Layers",
+                                    "type": "dynamic",
+                                    "visiblelayers": "",
+                                    "alpha": 0.5,
+                                    "visible": false,
+                                    "enablePopup": true,
+                                    "url": "https://applications.bewapp.be/ags/rest/services/bewapp/BEWAPP_Poubelle/MapServer"
+                                },
+                                {
+                                    "label": "Visible Layers",
+                                    "type": "dynamic",
+                                    "visiblelayers": "0,1",
+                                    "alpha": 1,
+                                    "visible": false,
+                                    "url": "https://applications.bewapp.be/ags/rest/services/FondDePlan_BeWaPP_mppo/MapServer"
+                                }
                             ]
                         },
                         {
-                            "label":"Tiled MapService",
-                            "services":
-                            [
+                            "label": "Tiled MapService",
+                            "services": [
                                 {
-                                    "label":"Tiled Links",
-                                    "type":"tiled",
-                                    "alpha":1, 
-                                    "url":"https://services.arcgisonline.nl/arcgis/rest/services/Luchtfoto/Luchtfoto/MapServer",
-                                    "links":
-                                    [
-                                        {"title":"News Intranet","url":"http://intranet.pch.etat.lu/gis/actualites-gis/1178-gisviewer-nouvelle-couche-cartes-topographiques-3d-dvldvd.html","icon":"EditPaste32.png"}
+                                    "label": "Tiled Links",
+                                    "type": "tiled",
+                                    "alpha": 1,
+                                    "url": "https://services.arcgisonline.nl/arcgis/rest/services/Luchtfoto/Luchtfoto/MapServer",
+                                    "links": [
+                                        {
+                                            "title": "News Intranet",
+                                            "url": "http://intranet.pch.etat.lu/gis/actualites-gis/1178-gisviewer-nouvelle-couche-cartes-topographiques-3d-dvldvd.html",
+                                            "icon": "EditPaste32.png"
+                                        }
                                     ]
                                 },
                                 {
-                                    "label":"Tiled MinScale 10000",
-                                    "type":"tiled",
-                                    "alpha":1,
-                                    "minScale":10000, 
-                                    "url":"http://gis.pch.etat.lu/arcgis/rest/services/sig/leves/MapServer"
+                                    "label": "Tiled MinScale 10000",
+                                    "type": "tiled",
+                                    "alpha": 1,
+                                    "minScale": 10000,
+                                    "url": "http://gis.pch.etat.lu/arcgis/rest/services/sig/leves/MapServer"
                                 }
                             ]
                         },
                         {
-                            "label":"Wms",
-                            "services":
-                            [
+                            "label": "Wms",
+                            "services": [
                                 {
-                                    "label":"Wms layers",
-                                    "type":"wms",
-                                    "layers":"0,1,2",
-                                    "alpha":1, 
-                                    "version":"1.3.0",
-                                    "url":"http://ws.geoportail.lu/natura2000?"
+                                    "label": "Wms layers",
+                                    "type": "wms",
+                                    "layers": "0,1,2",
+                                    "alpha": 1,
+                                    "version": "1.3.0",
+                                    "url": "http://ws.geoportail.lu/natura2000?"
                                 },
                                 {
-                                    "label":"Wms one layer",
-                                    "type":"wms",
-                                    "layers":"0",
-                                    "alpha":1, 
-                                    "url":"http://ws.geoportail.lu/250k?"
+                                    "label": "Wms one layer",
+                                    "type": "wms",
+                                    "layers": "0",
+                                    "alpha": 1,
+                                    "url": "http://ws.geoportail.lu/250k?"
                                 }
                             ]
                         },
                         {
-                            "label":"FeatureLayer",
-                            "services":
-                            [
+                            "label": "Group FeatureLayer",
+                            "services": [
                                 {
-                                    "label":"FeatureLayer maxScale",
-                                    "type":"ArcGISFeatureLayer",
-                                    "maxScale":10000,
-                                    "alpha":1, 
-                                    "url":"http://ws.geoportail.lu/natura2000?"
+                                    "label": "Service FeatureLayer",
+                                    "type": "ArcGISFeatureLayer",
+                                    "alpha": 1,
+                                    "url": "https://services3.arcgis.com/b7ay1OgWNo9QMMMz/ArcGIS/rest/services/RiverWalk_Story_Data/FeatureServer",
+                                    "enablePopup": true
                                 },
                                 {
-                                    "label":"FeatureLayer Url",
-                                    "type":"ArcGISFeatureLayer",
-                                    "alpha":1, 
-                                    "url":"http://wsetat.geoportal.lu/emwelt?"
+                                    "label": "Service FeatureLayer 2",
+                                    "type": "ArcGISFeatureLayer",
+                                    "alpha": 1,
+                                    "url": "https://services3.arcgis.com/b7ay1OgWNo9QMMMz/ArcGIS/rest/services/RiverWalk_Story_Data/FeatureServer/0",
+                                    "enablePopup": true
                                 }
                             ]
                         }
@@ -107,59 +106,68 @@
             ]
         },
         {
-            "label":"Thème 2",
-            "icon":"f206",
-            "color":"brown",
-            "panels":
-            [
+            "label": "Thème 2",
+            "icon": "f206",
+            "color": "brown",
+            "panels": [
                 {
-                    "label":"WebMap",
-                    "services":
-                    [
-						{
-                            "label":"Tiled",
-							"url":"https://www.arcgis.com/sharing/rest/content/items/8a567ebac15748d39a747649a2e86cf4",	
-							"type":"webMap",
-							"alpha":1, 
-							"visible":false
+                    "label": "WebMap",
+                    "services": [
+                        {
+                            "label": "Tiled",
+                            "url": "https://www.arcgis.com/sharing/rest/content/items/8a567ebac15748d39a747649a2e86cf4",
+                            "type": "webMap",
+                            "alpha": 1,
+                            "visible": false
                         },
                         {
-                            "label":"Tiled",
-							"url":"https://www.arcgis.com/sharing/rest/content/items/cb46d09b13f24a8da38ff96ace000cc7",	
-							"type":"webMap",
-							"alpha":1, 
-							"visible":false
+                            "label": "Tiled",
+                            "url": "https://www.arcgis.com/sharing/rest/content/items/cb46d09b13f24a8da38ff96ace000cc7",
+                            "type": "webMap",
+                            "alpha": 1,
+                            "visible": false
                         },
                         {
-                            "label":"Tiled",
-							"url":"https://www.arcgis.com/sharing/rest/content/items/8d1414297d6b488f9fdc2258e235c1dd",	
-							"type":"webMap",
-							"alpha":1, 
-							"visible":false
+                            "label": "Tiled",
+                            "url": "https://www.arcgis.com/sharing/rest/content/items/8d1414297d6b488f9fdc2258e235c1dd",
+                            "type": "webMap",
+                            "alpha": 1,
+                            "visible": false
                         },
                         {
-                            "label":"Portal",
-							"url":"https://applications.bewapp.be/waportal/sharing/rest/content/items/a2f79bd3140c4aa6a3dd1ed93e89e4a5",	
-							"type":"webMap",
-							"alpha":1, 
-							"visible":false
+                            "label": "Portal",
+                            "url": "https://applications.bewapp.be/waportal/sharing/rest/content/items/a2f79bd3140c4aa6a3dd1ed93e89e4a5",
+                            "type": "webMap",
+                            "alpha": 1,
+                            "visible": false
                         }
                     ]
                 }
             ]
         },
         {
-            "label":"Thème 3",
-            "icon":"f206",
-            "color":"green",
-            "panels":
-            [
+            "label": "Thème 3",
+            "icon": "f206",
+            "color": "green",
+            "panels": [
                 {
-                    "label":"DynamicMapService",
-                    "url":"https://applications.bewapp.be/waportal/sharing/rest/content/items/14228ba1269a4ecab5015671d8f19912",	
-                    "type":"webMap",
-                    "alpha":1, 
-                    "visible":false
+                    "label": "Services",
+                    "services": [
+                        {
+                            "label": "DynamicMapService",
+                            "url": "https://www.arcgis.com/sharing/rest/content/items/781fa377067f408880d8437b8a4fd7a8",
+                            "type": "webMap",
+                            "alpha": 0.5,
+                            "visible": false
+                        },
+                        {
+                            "label": "DynamicMapService",
+                            "url": "https://applications.bewapp.be/waportal/sharing/rest/content/items/e10ded4f2024495ea8e751254bc1934c",
+                            "type": "webMap",
+                            "alpha": 0.5,
+                            "visible": false
+                        }
+                    ]
                 }
             ]
         }

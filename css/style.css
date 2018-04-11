@@ -437,7 +437,7 @@
 .treeItem.openable {
 	background-repeat: no-repeat;
 	background-position: left top;
-	background-position-y: 3px;
+	background-position-y: 0px;
 	background-position-x: 2px;
 	background-image: url('../images/close.gif');
 	/*background-size: 12px;*/

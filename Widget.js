@@ -3,7 +3,7 @@ define([
 	'dojo/_base/lang',
 	'dojo/on',
 	'jimu/BaseWidget',
-	'./Theme',
+	'./src/Theme',
 	'./Splash',
 	'./ProxyManager'
 	],
@@ -54,7 +54,7 @@ define([
 			var configThemes = this.config.themes;
 			for(var i=0;i<configThemes.length;i++)
 			{
-				var theme = new Theme(this.map,configThemes[i],this.catalogContainer);
+				var theme = new Theme(this.map,configThemes[i],this.catalogContainer,this);
 				this.addTheme(theme);
 			}
 			
@@ -95,14 +95,15 @@ define([
 			this.themeLabel.innerHTML = theme.label;
 			
 			//ADD PANELS
-			this.splash.wait();
+			this.current.addPanels();
+			/*this.splash.wait();
 			this.current.loadMapItems().then(
 					lang.hitch(this,function(){
 						this.current.addPanels();
 						this.splash.hide();
 					}),
 					lang.hitch(this,function(error){this.error(error);})
-				);
+				);*/
 		},
 
 		getColor:function(theme)
