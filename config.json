@@ -33,6 +33,7 @@
                                     "visiblelayers": "0,1",
                                     "alpha": 1,
                                     "visible": false,
+                                    "enablePopup": true,
                                     "url": "https://applications.bewapp.be/ags/rest/services/FondDePlan_BeWaPP_mppo/MapServer"
                                 }
                             ]
@@ -113,6 +114,13 @@
                 {
                     "label": "WebMap",
                     "services": [
+                        {
+                            "label": "marathon",
+                            "url": "https://www.arcgis.com/sharing/rest/content/items/258a54bd57f54d379e0e3655ccb3e0e7",
+                            "type": "webMap",
+                            "alpha": 1,
+                            "visible": true
+                        },
                         {
                             "label": "Tiled",
                             "url": "https://www.arcgis.com/sharing/rest/content/items/8a567ebac15748d39a747649a2e86cf4",
