@@ -14,7 +14,9 @@ define([
     "esri/layers/ArcGISDynamicMapServiceLayer",
     "dojo/mouse",
     'jimu/LayerInfos/LayerInfos',
-    'esri/request'
+    'esri/request',
+	'dojo/Deferred',
+	'dojo/promise/all'
 ], function(
 	Evented,
 	declare,
@@ -31,7 +33,9 @@ define([
     ArcGISDynamicMapServiceLayer,
     mouse,
     LayerInfos,
-    esriRequest
+    esriRequest,
+	Deferred,
+	all
 	)
 {
     var TocItem = declare([Evented], {
@@ -164,7 +168,7 @@ define([
                     promises.push(tocItem.load());
                 }
 
-                return Promise.all(promises);
+                return all(promises);
             }
 
             switch(this.config.type)
@@ -181,7 +185,9 @@ define([
             this.hasCheckbox(true);
             this.hasZoom(true);
             this.hasOptions(true);
-            return Promise.resolve();
+			var deferred = new Deferred();
+			deferred.resolve();
+			return deferred.promise;
         },
         
         isGroupLayer:function()
@@ -192,7 +198,7 @@ define([
         hasCheckbox:function(value)
         {
             this.checkbox.style.display = value ? '':'none';
-            this.tdCheckBox.width = value ? '20' : 0;
+            this.tdCheckBox.style.width = value ? '20px' : '0px';
         },
 
         isVisible:function()
@@ -256,11 +262,11 @@ define([
             var tr = document.createElement("tr");
 
             var tdDrag = document.createElement("td");
-            tdDrag.width = '0';
+            tdDrag.style.width = '0px';
 
             this.tdCheckBox = document.createElement("td");
             this.tdCheckBox.className = 'checkbox';
-            this.tdCheckBox.width = '20';
+            this.tdCheckBox.style.width = '20px';
             this.tdCheckBox.valign = 'top';
             this.checkbox = document.createElement('INPUT');
 			this.checkbox.className = 'checkbox';
@@ -294,7 +300,7 @@ define([
             tdLabel.appendChild(this.spanLabel);
 
             var tdSpace = document.createElement("td");
-            tdSpace.width = '18';
+            tdSpace.style.width = '18px';
             tdSpace.valign='top';
 
             table.appendChild(tr);
@@ -389,7 +395,7 @@ define([
             this.dom.appendChild(this.menu);
         },
 
-        addLink(link)
+        addLink:function(link)
         {
             var menuItem = document.createElement('div');
             menuItem.innerHTML = link.title;
@@ -465,7 +471,7 @@ define([
 			}
 		},
 
-		allParentIsVisible(item)
+		allParentIsVisible:function(item)
 		{
             var parent = item.parent();
 			if(!parent)

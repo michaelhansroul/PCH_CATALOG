@@ -34,8 +34,14 @@ define([
 				for(var i=0;i<this.config.panels.length;i++)
 				{
 					var panel = new Panel(this.map,this.config.panels[i]);
-
-					panel.load().then(
+					var p = panel.load();
+					p.then(
+						lang.hitch(this,function(){}),
+						lang.hitch(this,function(error){
+							this.widget.error(error);
+						})
+					);
+					/*panel.load().then(
 						lang.hitch(this,function(){
 							//After load
 							
@@ -43,7 +49,7 @@ define([
 						lang.hitch(this,function(error){
 							this.widget.error(error);
 						}),
-					);
+					);*/
 
 					if(i>0)
 						panel.hide();

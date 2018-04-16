@@ -37,6 +37,7 @@ define([
 	  
 		startup: function() {
 			this.inherited(arguments);
+			
 			//PROXY
 			window.catalogProxy = new Proxy(this.config.proxy,this.config.prefixes);
 
@@ -158,11 +159,11 @@ define([
 				elem.style.display = "none";
 		},
 		
-		show(elem){
+		show: function(elem){
 			elem.style.display = "block";
 		},
 		
-		hide(elem){
+		hide: function(elem){
 			elem.style.display = "none";
 		}
 	  

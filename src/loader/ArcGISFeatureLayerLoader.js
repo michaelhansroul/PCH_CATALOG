@@ -4,14 +4,18 @@ define([
 	"dojo/on",
 	"dojo/_base/lang",
     "dojo/dom-class",
-    'esri/request'
+    'esri/request',
+	"../Promise",
+	'dojo/promise/all'
 ], function(
 	Evented,
 	declare,
 	on,
 	lang,
     domClass,
-    esriRequest
+    esriRequest,
+	Promise,
+	all
 	)
 {
     return declare([Evented], {
@@ -55,7 +59,7 @@ define([
                                     promises.push(tocItem.load());
                                 }
 
-                                Promise.all(promises).then(
+                                all(promises).then(
                                     lang.hitch(self,function(){resolve();}),
                                     lang.hitch(self,function(error){reject(error);})
                                 );
@@ -89,7 +93,7 @@ define([
                         promises.push(tocItem.load());
                     }
 
-                    Promise.all(promises).then(
+                    all(promises).then(
                         lang.hitch(self,function(){resolve();}),
                         lang.hitch(self,function(error){reject(error);})
                     );

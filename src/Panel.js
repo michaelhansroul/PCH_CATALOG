@@ -71,12 +71,12 @@ define([
 				this.hide();
 		},
 		
-		show(){
+		show:function(){
 			domClass.remove(this.content,'hide');
 			this.headerButton.className = "panelButton icon up";
 		},
 		
-		hide(){
+		hide:function(){
 			domClass.add(this.content,'hide');
 			this.headerButton.className = "panelButton icon down";
 		},

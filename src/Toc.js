@@ -14,7 +14,9 @@ define([
 	'esri/layers/WMSLayer',
 	'esri/layers/ArcGISTiledMapServiceLayer',
 	"esri/layers/FeatureLayer",
-	'./TocItem'
+	'./TocItem',
+	'./Promise',
+	'dojo/promise/all'
 ], function(
 	Evented,
 	declare,
@@ -31,7 +33,9 @@ define([
 	WMSLayer, 
 	ArcGISTiledMapServiceLayer,
 	FeatureLayer,
-	TocItem
+	TocItem,
+	Promise,
+	all
 	)
 {
     return declare([Evented], {
@@ -67,7 +71,7 @@ define([
 
 			var self = this;
 			return new Promise(function(resolve, reject) {
-				Promise.all(promises).then(
+				all(promises).then(
 					function(){self.showVisibleLayers();resolve();},
 					function(error){reject(error);}
 				);
