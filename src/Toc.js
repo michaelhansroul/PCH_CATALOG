@@ -14,8 +14,7 @@ define([
 	'esri/layers/WMSLayer',
 	'esri/layers/ArcGISTiledMapServiceLayer',
 	"esri/layers/FeatureLayer",
-	'./TocItem',
-	"jimu/LayerStructure"
+	'./TocItem'
 ], function(
 	Evented,
 	declare,
@@ -32,8 +31,7 @@ define([
 	WMSLayer, 
 	ArcGISTiledMapServiceLayer,
 	FeatureLayer,
-	TocItem,
-	LayerStructure
+	TocItem
 	)
 {
     return declare([Evented], {

@@ -13,7 +13,7 @@ define([
     "esri/layers/FeatureLayer",
     "esri/layers/ArcGISDynamicMapServiceLayer",
     "dojo/mouse",
-    "jimu/LayerStructure",
+    'jimu/LayerInfos/LayerInfos',
     'esri/request'
 ], function(
 	Evented,
@@ -30,7 +30,7 @@ define([
     FeatureLayer,
     ArcGISDynamicMapServiceLayer,
     mouse,
-    LayerStructure,
+    LayerInfos,
     esriRequest
 	)
 {
@@ -57,7 +57,7 @@ define([
             }));
             
             this.layerStructureAction = [];
-			this.layerStructureInstance = LayerStructure.getInstance();
+			/*this.layerStructureInstance = LayerStructure.getInstance();
 
 			this.layerStructureInstance.on(LayerStructure.EVENT_STRUCTURE_CHANGE, lang.hitch(this,function(eventObject) {
 				for(var i=0;i<this.layerStructureAction.length;i++)
@@ -67,7 +67,15 @@ define([
 						this.enablePopup(node);
 				}
 				this.layerStructureAction = [];
-			}));
+			}));*/
+			
+			LayerInfos.getInstance(this.map, this.map.itemInfo)
+            .then(lang.hitch(this, function(operLayerInfos) {
+				this.operLayerInfos = operLayerInfos;
+				on(this.operLayerInfos,
+				  'layerInfosChanged',
+				  lang.hitch(this, this._onLayerInfosChanged));
+            }));
 
             if(!this.config.services)return;
             for(var i=0;i<this.config.services.length;i++)
@@ -76,6 +84,17 @@ define([
                 this.treeItem.addChild(childItem.treeItem);
             }
         },
+		
+		_onLayerInfosChanged:function()
+		{
+			for(var i=0;i<this.layerStructureAction.length;i++)
+			{
+				var node = this.operLayerInfos.getLayerInfoById(this.layer.id);
+				if(this.layerStructureAction[i].enablePopup)
+					this.enablePopup(node);
+			}
+			this.layerStructureAction = [];
+		},
 
         refreshMinMaxScale:function()
 		{
@@ -515,7 +534,7 @@ define([
             
             if(this.config.enablePopup)
             {
-                var node = this.layerStructureInstance.getNodeById(this.layer.id);
+                var node = this.operLayerInfos.getLayerInfoById(this.layer.id);
                 if(node)
                     this.enablePopup(node);
                 else
@@ -533,31 +552,32 @@ define([
             switch(this.config.type)
 			{
                 case "dynamic":
-                    this.enablePopupSubLayer(node._layerInfo,this.visibleIds,this.config.popupInfos);
+                    this.enablePopupSubLayer(node.id,node,this.visibleIds,this.config.popupInfos);
                     break;
                 default:
                     node.enablePopup();
             }
         },
 
-        enablePopupSubLayer:function(layerInfo,visiblelayers,popupInfos)
+        enablePopupSubLayer:function(layerId,layerInfo,visiblelayers,popupInfos)
         {
             if(layerInfo && layerInfo.newSubLayers && layerInfo.newSubLayers.length>0)
             {
                 for(var i=0;i<layerInfo.newSubLayers.length;i++)
                 {
-                    this.enablePopupSubLayer(layerInfo.newSubLayers[i],visiblelayers,popupInfos);
+                    this.enablePopupSubLayer(layerId,layerInfo.newSubLayers[i],visiblelayers,popupInfos);
                 }
             }
-
-            if(!visiblelayers || (layerInfo.originOperLayer.subId && visiblelayers.indexOf(layerInfo.originOperLayer.subId.toString())!=-1))
+			
+			var subId = layerInfo.id.substring(layerId.length+1,layerInfo.id.length);
+            if(!visiblelayers || (subId && visiblelayers.indexOf(subId.toString())!=-1))
             {
                 var found = true;
                 if(popupInfos)
                 {
                     found = false;
                     for(var i=0;i<popupInfos.length;i++)
-                        if(layerInfo.originOperLayer.subId && popupInfos[i].id==layerInfo.originOperLayer.subId)
+                        if(subId && popupInfos[i].id==subId)
                             found = true;
                 }
 
