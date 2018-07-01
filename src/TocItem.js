@@ -789,7 +789,32 @@ define([
 				}
 			}
 			return null;
-		}
+        },
+        
+        search: function(value){
+            var contains = true;
+            if(value)
+                contains = (this.config.label.toUpperCase().indexOf(value.toUpperCase())!=-1);
+            
+            if(this.isGroupLayer){
+                var found = false;
+                for(var i=0;i<this.treeItem.children.length;i++)
+                {
+                    if(this.treeItem.children[i].data.search(value))
+                        found = true;
+                }
+
+                if(found)
+                    contains = true;
+            }
+            
+            if(contains)
+                this.treeItem.dom.style.display = "block";
+            else
+                this.treeItem.dom.style.display = "none";
+
+            return contains;
+        }
 		
     });
 

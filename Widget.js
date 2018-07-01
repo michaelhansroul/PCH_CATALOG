@@ -37,12 +37,21 @@ define([
 	  
 		startup: function() {
 			this.inherited(arguments);
-			
+
 			//PROXY
 			window.catalogProxy = new Proxy(this.config.proxy,this.config.prefixes);
 
 			//SPLASH
 			this.splash = new Splash(this.splashContainer,this.overlay);
+
+			//SEARCH
+			on(this.searchInput,"keyup",lang.hitch(this,function(){
+				if(!this.themes) return;
+				for(var i=0;i<this.themes.length;i++)
+				{
+					this.themes[i].search(this.searchInput.value);
+				}
+			}));
 			
 			//THEMES MENU
 			this.themes = [];

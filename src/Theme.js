@@ -69,6 +69,13 @@ define([
 			{
 				this.container.removeChild(this.panels[i].dom);
 			}
+		},
+
+		search:function(value){
+			for(var i=0;i<this.panels.length;i++)
+			{
+				this.panels[i].search(value);
+			}
 		}
     });
 });

@@ -85,6 +85,19 @@ define([
 			{
 				this.tree.items()[t].data.show();
 			}
+		},
+
+		search:function(value){
+			for(var i=0;i<this.items.length;i++)
+			{
+				this.items[i].search(value);
+				/*if(!value)
+					this.items[i].dom.style.display = 'block';
+				else if(this.items[i].config.label.toUpperCase().indexOf(value.toUpperCase())!=-1)
+					this.items[i].dom.style.display = 'block';
+				else
+					this.items[i].dom.style.display = 'none';*/
+			}
 		}
     });
 });

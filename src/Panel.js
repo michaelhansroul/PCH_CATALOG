@@ -91,8 +91,12 @@ define([
 		{
 			if(this.toc)
 				this.toc.hideVisibleLayer();
+		},
+
+		search:function(value){
+			if(this.toc)
+				this.toc.search(value);
 		}
-		
 		
     });
 });

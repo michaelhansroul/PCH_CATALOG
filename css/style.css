@@ -216,6 +216,20 @@
 	float: left;
 }
 
+/**********************/
+/*       SEARCH      */
+/**********************/
+.catalog .search
+{
+	width: 100%;
+	padding:0px 0px 10px 0px;
+}
+
+.catalog .search input
+{
+	width: 100%;
+	padding: 5px;
+}
 
 /**********************/
 /*       THEMES      */
