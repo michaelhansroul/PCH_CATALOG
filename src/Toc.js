@@ -88,9 +88,18 @@ define([
 		},
 
 		search:function(value){
+			var result = {
+                contains : false,
+                containsService : false
+			};
+			
 			for(var i=0;i<this.items.length;i++)
 			{
-				this.items[i].search(value);
+				var resultItem = this.items[i].search(value);
+				if(resultItem.contains)
+					result.contains = true;
+                if(resultItem.containsService)
+					result.containsService = true;
 				/*if(!value)
 					this.items[i].dom.style.display = 'block';
 				else if(this.items[i].config.label.toUpperCase().indexOf(value.toUpperCase())!=-1)
@@ -98,6 +107,8 @@ define([
 				else
 					this.items[i].dom.style.display = 'none';*/
 			}
+
+			return result;
 		}
     });
 });

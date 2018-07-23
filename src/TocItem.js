@@ -223,6 +223,11 @@ define([
             this.spanLabel.innerHTML = value;
         },
 
+        getLabel:function()
+        {
+            return this.spanLabel.innerHTML;
+        },
+
         parent:function()
         {
             if(!this.treeItem.parent.parent)
@@ -792,28 +797,41 @@ define([
         },
         
         search: function(value){
-            var contains = true;
-            if(value)
-                contains = (this.config.label.toUpperCase().indexOf(value.toUpperCase())!=-1);
+            var result = {
+                contains : true,
+                containsService : value ? false : true,
+            };
             
-            if(this.isGroupLayer){
+            if(value)
+                result.contains = (this.getLabel().toUpperCase().indexOf(value.toUpperCase())!=-1);
+            
+            if(result.contains && !this.isGroupLayer())
+                result.containsService = true;
+            
+            if(this.isGroupLayer()){
                 var found = false;
+                var foundService = false;
                 for(var i=0;i<this.treeItem.children.length;i++)
                 {
-                    if(this.treeItem.children[i].data.search(value))
+                    var resultGroupLayer = this.treeItem.children[i].data.search(value);
+                    if(resultGroupLayer.contains)
                         found = true;
+                    if(resultGroupLayer.containsService)
+                        foundService = true;
                 }
 
                 if(found)
-                    contains = true;
+                    result.contains = true;
+                if(foundService)
+                    result.containsService = true;
             }
             
-            if(contains)
+            if(result.containsService)
                 this.treeItem.dom.style.display = "block";
             else
                 this.treeItem.dom.style.display = "none";
 
-            return contains;
+            return result;
         }
 		
     });

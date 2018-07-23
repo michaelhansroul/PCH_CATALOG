@@ -94,8 +94,13 @@ define([
 		},
 
 		search:function(value){
-			if(this.toc)
-				this.toc.search(value);
+			if(this.toc){
+				var result = this.toc.search(value);
+				if(result.containsService)
+					this.dom.style.display = 'block';
+				else
+					this.dom.style.display = 'none';
+			}
 		}
 		
     });
